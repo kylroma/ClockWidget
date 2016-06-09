@@ -16,21 +16,21 @@ FormClock::FormClock(QWidget *parent) : QWidget(parent), bMove(false)
     QVBoxLayout *pLayout = new QVBoxLayout;
     pLayout->addWidget(_pDate);
     pLayout->addWidget(_pClock);
-
+    setLayout(pLayout);
+    
     setStyleClock();
 
     QTimer *pTimer = new QTimer(this);
     connect(pTimer, SIGNAL(timeout()), this, SLOT(showTime()));
     pTimer->start(1000);
-
-    setWindowFlags(Qt::FramelessWindowHint);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnBottomHint | Qt::Tool);
-    setLayout(pLayout);
 }
 
 
 void FormClock::setStyleClock()
 {
+    setWindowFlags(Qt::FramelessWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnBottomHint | Qt::Tool);   
+    
     QFile file("StyleClock.css");
     file.open(QFile::ReadOnly);
     QString strCSS = QLatin1String(file.readAll());
